@@ -11,23 +11,24 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SampleService {
 
 
-    public static final long EXECUTION_TIME = 5000L;
+    public static final long EXECUTION_TIME = 2000L;
 
     private AtomicInteger count = new AtomicInteger();
 
-    @Job(name = "The sample job with variable %0", retries = 2)
+    @Job(name = "Método de exemplo jobrunr", retries = 2)
     public void executeSampleJob(String variable) {
 
-        log.info("The sample job has begun. The variable you passed is {}", variable);
+        log.info("Olá {}", variable);
         try {
             Thread.sleep(EXECUTION_TIME);
         } catch (InterruptedException e) {
-            log.error("Error while executing sample job", e);
+            log.error("Erro: ", e);
         } finally {
             count.incrementAndGet();
-            log.info("Sample job has finished...");
+            log.info("Finalizado método de exemplo");
         }
     }
+
 
     public int getNumberOfInvocations() {
         return count.get();
